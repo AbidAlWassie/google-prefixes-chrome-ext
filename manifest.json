@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Google Search Extension",
+  "version": "1.0",
+  "description": "Extension to add a button to Google Search page",
+  "permissions": ["activeTab"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "assets/img/icon16.png",
+      "128": "assets/img/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "assets/img/icon16.png",
+    "128": "assets/img/icon128.png"
+  }
+}
