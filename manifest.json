@@ -3,7 +3,8 @@
   "name": "Google Search Extension",
   "version": "1.0",
   "description": "Extension to add a button to Google Search page",
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "webNavigation"],
+  "host_permissions": ["https://*.google.com/*"],
   "action": {
     "default_popup": "index.html",
     "default_icon": {
@@ -13,7 +14,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://www.google.com/*"],
+      "matches": ["*://www.google.com/*"],
       "js": ["content.js"]
     }
   ],

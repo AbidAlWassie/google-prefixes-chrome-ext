@@ -1,9 +1,9 @@
 // background.js
-chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-  // Check if the Google search page is loaded
-  if (tab.url.includes("google.com/search") && changeInfo.status === "complete") {
+chrome.webNavigation.onCompleted.addListener(function (details) {
+  // Check if the URL is a Google search page
+  if (details.url && details.url.includes("google.com/search")) {
     chrome.scripting.executeScript({
-      target: { tabId: tabId },
+      target: { tabId: details.tabId },
       function: addPrefixButtonToDiv
     });
   }
