@@ -1,13 +1,14 @@
-// background.js
+// filename: background.js
+
 chrome.webNavigation.onCompleted.addListener(function (details) {
   // Check if the URL is a Google search page
   if (details.url && details.url.includes("google.com/search")) {
-    chrome.scripting.executeScript({
-      target: { tabId: details.tabId },
-      function: addPrefixButtonToDiv
-    });
+    // Send a message to the content script to execute the script
+    chrome.tabs.sendMessage(details.tabId, { action: "executeScript" });
   }
 });
+
+
 
 // Function to be executed in the context of the page
 function addPrefixButtonToDiv() {
@@ -24,8 +25,16 @@ function addPrefixButtonToDiv() {
 
       // Add click event listener to the new button
       prefixButton.addEventListener('click', function () {
-        alert('Prefixes Button clicked!');
-        // Add your desired functionality here when the button is clicked
+        // Find the textarea with the class 'gLFyf'
+        const textarea = document.querySelector('textarea.gLFyf');
+
+        // Check if the textarea is not null or undefined
+        if (textarea) {
+          // Update the text inside the textarea
+          textarea.value = 'Your updated text here';
+        } else {
+          console.error('Textarea not found');
+        }
       });
 
       // Append the new button to the div

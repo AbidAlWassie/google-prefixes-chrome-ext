@@ -1,3 +1,5 @@
+// filename: popup.js
+
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   // Check if the Google search page is loaded
   if (tab.url.includes("google.com/search") && changeInfo.status === "complete") {
